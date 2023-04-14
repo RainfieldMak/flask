@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>AJAX Example</title>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+	<h1>Calculator</h1>
+	<form id="calculator">
+		<label for="num1">Number 1:</label>
+		<input type="number" id="num1" name="num1" required>
+		<label for="num2">Number 2:</label>
+		<input type="number" id="num2" name="num2" required>
+		<button type="submit" id="submit">Calculate</button>
+	</form>
+	<div id="result"></div>
+	<script>
+		$(document).ready(function() {
+			$('#calculator').submit(function(event) {
+				event.preventDefault();
+				$.ajax({
+					type: 'POST',
+					url: '/calculate',
+					data: $(this).serialize(),
+					success: function(response) {
+						$('#result').text('Result: ' + response.result);
+					}
+				});
+			});
+		});
+	</script>
+</body>
+</html>
+
